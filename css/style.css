@@ -1068,6 +1068,7 @@ a {
   line-height: 1.5;
   margin-top: 10px;
   padding: 5px 15px;
+  overflow-x: auto;
   color: #657b83;
   font-size: 10px;
   border: 1px solid #ccc;
@@ -1465,6 +1466,7 @@ a {
   background: #272822;
   margin: 10px 0;
   padding: 10px 10px;
+  overflow: auto;
   color: #4c4c4c;
   line-height: 22.400000000000002px;
 }
