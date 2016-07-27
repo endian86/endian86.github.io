@@ -201,55 +201,6 @@
       
         <p><code>Webpack</code> 是一个很nice的脚手架，不仅可以用来打包模块，更可以用其他预处理器转成源码，比如通过配置<code>bable</code>，从而可以使用 <code>ES6</code> 。</p>
 <h6 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h6><p><code>Webpack</code>运行在Node环境下，首先需要安装Node.js，自行google 。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install webpack -g</div></pre></td></tr></table></figure></p>
-<h6 id="2-Hello-Word"><a href="#2-Hello-Word" class="headerlink" title="2. Hello Word"></a>2. Hello Word</h6><ul>
-<li>新建空目录并进入</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir webpack_test &amp;&amp; cd webpack_test</div></pre></td></tr></table></figure>
-<ul>
-<li>新建文件 <code>entry.js</code>,并写入 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//entry.js</div><div class="line">document.write(&quot;Hello World&quot;);</div></pre></td></tr></table></figure>
-<ul>
-<li>新建文件 <code>index.html</code>，并写入</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;!--index.html--&gt;</div><div class="line">&lt;html&gt;</div><div class="line">    &lt;head&gt;</div><div class="line">        &lt;meta charset=&quot;utf-8&quot;&gt;</div><div class="line">    &lt;/head&gt;</div><div class="line">    &lt;body&gt;</div><div class="line">        &lt;script type=&quot;text/javascript&quot; src=&quot;bundle.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</div><div class="line">    &lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
-<ul>
-<li>运行</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ webpack ./entry.js bundle.js</div><div class="line"></div><div class="line">Hash: 7e14881bc8476edb7d50</div><div class="line">Version: webpack 1.13.1</div><div class="line">Time: 53ms</div><div class="line">    Asset     Size  Chunks             Chunk Names</div><div class="line">bundle.js  1.41 kB       0  [emitted]  main</div><div class="line">   [0] ./entry.js 22 bytes &#123;0&#125; [built]</div></pre></td></tr></table></figure>
-<p><code>webpack</code> 将 <code>entry.js</code> 打包成 <code>bundle.js</code> ,用浏览器打开 <code>index.html</code> 便会显示 <code>Hello Word</code> 。</p>
-<h6 id="3-使用配置文件"><a href="#3-使用配置文件" class="headerlink" title="3. 使用配置文件"></a>3. 使用配置文件</h6><p>上面的Hello word 是最简单的 <code>webpack</code> 使用方式。实际应用中，我们会使用配置文件。</p>
-<ul>
-<li>新建 <code>webpack.config.js</code> ,</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">    entry: &quot;./entry.js&quot;,</div><div class="line">    output: &#123;</div><div class="line">        path: __dirname,</div><div class="line">        filename: &quot;bundle.js&quot;,</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>– <code>entry</code> : 入口配置项</p>
-<p>– <code>output</code> : 输出配置</p>
-<p>—- <code>path</code> : 输出位置</p>
-<p>—- <code>filename</code> : 主入口的文件名,可以增加 <code>[hash]</code> 从而输出带hash值的文件名，<code>eg: bundle.[hash].js</code></p>
-<p>运行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ webpack</div><div class="line">Hash: e49dd391403a0d6aca87</div><div class="line">Version: webpack 1.13.1</div><div class="line">Time: 49ms</div><div class="line">    Asset     Size  Chunks             Chunk Names</div><div class="line">bundle.js  1.42 kB       0  [emitted]  main</div><div class="line">   [0] ./entry.js 31 bytes &#123;0&#125; [built]</div></pre></td></tr></table></figure>
-<p>依旧生成 <code>bundle.js</code> ，刷新<code>index.html</code> 页面，显示Hello World。</p>
-<ul>
-<li>复杂些的配置</li>
-</ul>
-<p>我们新建些 <code>js</code> <code>css</code>文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//test1.js</div><div class="line">module.exports = &apos;test1&apos;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//test2.js</div><div class="line">module.exports = &apos;test2&apos;;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//test.css</div><div class="line">body&#123;</div><div class="line">	background: #ff0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>修改 <code>webpack.config.js</code> 文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">    entry: &quot;./entry.js&quot;,</div><div class="line">    output: &#123;</div><div class="line">        path: __dirname,</div><div class="line">        filename: &quot;bundle.js&quot;,</div><div class="line">    &#125;,</div><div class="line">    module: &#123;</div><div class="line">        loaders: [</div><div class="line">            &#123; test: /\.css$/, loader: &quot;style!css&quot; &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>– <code>module</code>: 模块</p>
-<p>—- <code>loaders</code>:  这是webpack最强大的地方，通过 <code>loaders</code>,可以进行各种转换，使用 <code>babel</code>、<code>autoprefixer</code>、<code>sass</code>，图片压缩，<code>tpl</code> 转成 <code>html</code> 。此处将 <code>css</code> 文件打包进 <code>bundle。js</code> 。</p>
-<p>修改 <code>entry.js</code> 文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//entry.js</div><div class="line">require(&quot;./test.css&quot;);</div><div class="line">document.write(&quot;Hello World&quot;);</div><div class="line">var test1 = require(&apos;./test1.js&apos;);</div><div class="line">var test2 = require(&apos;./test2.js&apos;);</div><div class="line">document.write(&quot;\t&quot;+test1);</div><div class="line">document.write(&quot;\t&quot;+test2);</div></pre></td></tr></table></figure>
-<p>执行 <code>webpack</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ webpack</div><div class="line">Hash: fb6cc3d6d1917bdc6fe2</div><div class="line">Version: webpack 1.13.1</div><div class="line">Time: 81ms</div><div class="line">    Asset     Size  Chunks             Chunk Names</div><div class="line">bundle.js  1.89 kB       0  [emitted]  main</div><div class="line">   [0] ./entry.js 179 bytes &#123;0&#125; [built] [1 error]</div><div class="line">   [1] ./test1.js 25 bytes &#123;0&#125; [built]</div><div class="line">   [2] ./test2.js 25 bytes &#123;0&#125; [built]</div><div class="line"></div><div class="line">ERROR in ./entry.js</div><div class="line">Module not found: Error: Cannot resolve module &apos;style&apos; in /Users/ma/NodeJS/webpack_test</div><div class="line"> @ ./entry.js 1:0-21</div></pre></td></tr></table></figure>
-<p>发现打包失败，报错了，无法解析 <code>style</code> 模块。<br>原因是 <code>webpack</code> 本身只能处理 <code>javascript</code>，我们需要安装 <code>css-loader</code> 模块去处理 <code>css</code> 文件，也需要安装 <code>style-loader</code> 模块来应用 <code>css</code> 文件的样式。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install css-loader style-loader</div></pre></td></tr></table></figure>
-<p>再次执行 <code>webpack</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ webpack</div><div class="line">Hash: 89cd8768ac0ee49f9895</div><div class="line">Version: webpack 1.13.1</div><div class="line">Time: 1056ms</div><div class="line">    Asset     Size  Chunks             Chunk Names</div><div class="line">bundle.js  11.9 kB       0  [emitted]  main</div><div class="line">   [0] ./entry.js 179 bytes &#123;0&#125; [built]</div><div class="line">   [5] ./test1.js 25 bytes &#123;0&#125; [built]</div><div class="line">   [6] ./test2.js 25 bytes &#123;0&#125; [built]</div><div class="line">    + 4 hidden modules</div></pre></td></tr></table></figure></p>
-<p>成功打包，刷新 <code>index.html</code> 页面，出现 <code>Hello World    test1    test2</code>，并且背景变成了黄色。</p>
-
       
     </div>
     
@@ -262,6 +213,10 @@
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/27/初步使用WebPack构建工具/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
