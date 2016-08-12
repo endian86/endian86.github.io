@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hugh Ma's Blog">
 <meta property="og:description" content="Webpack 是一个很nice的脚手架，不仅可以用来打包模块，更可以用其他预处理器转成源码，比如通过配置bable，从而可以使用 ES6 。
 1. 安装Webpack运行在Node环境下，首先需要安装Node.js，自行google 。1$ npm install webpack -g">
-<meta property="og:updated_time" content="2016-07-27T11:36:26.000Z">
+<meta property="og:updated_time" content="2016-08-12T07:52:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初步使用WebPack构建工具">
 <meta name="twitter:description" content="Webpack 是一个很nice的脚手架，不仅可以用来打包模块，更可以用其他预处理器转成源码，比如通过配置bable，从而可以使用 ES6 。
@@ -220,7 +220,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir webpack_test &amp;&amp; cd webpack_test</div></pre></td></tr></table></figure>
 <ul>
-<li>新建文件 <code>entry.js</code>,并写入 </li>
+<li>新建文件 <code>entry.js</code>,并写入</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//entry.js</div><div class="line">document.write(&quot;Hello World&quot;);</div></pre></td></tr></table></figure>
 <ul>
@@ -263,6 +263,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install css-loader style-loader</div></pre></td></tr></table></figure>
 <p>再次执行 <code>webpack</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$ webpack</div><div class="line">Hash: 89cd8768ac0ee49f9895</div><div class="line">Version: webpack 1.13.1</div><div class="line">Time: 1056ms</div><div class="line">    Asset     Size  Chunks             Chunk Names</div><div class="line">bundle.js  11.9 kB       0  [emitted]  main</div><div class="line">   [0] ./entry.js 179 bytes &#123;0&#125; [built]</div><div class="line">   [5] ./test1.js 25 bytes &#123;0&#125; [built]</div><div class="line">   [6] ./test2.js 25 bytes &#123;0&#125; [built]</div><div class="line">    + 4 hidden modules</div></pre></td></tr></table></figure></p>
 <p>成功打包，刷新 <code>index.html</code> 页面，出现 <code>Hello World    test1    test2</code>，并且背景变成了黄色。</p>
+<h6 id="4-热模块替代-hot-reload"><a href="#4-热模块替代-hot-reload" class="headerlink" title="4. 热模块替代/hot reload"></a>4. 热模块替代/hot reload</h6><p>运行下面代码安装响应模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm install vue-hot-reload-api --save-dev</div><div class="line">$ npm install -g webpack-dev-server</div></pre></td></tr></table></figure>
+<p>执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ webpack-dev-server --inline --hot</div></pre></td></tr></table></figure>
+<p>默认启动在<code>8080</code>端口，浏览器打开<code>http://127.0.0.1:8080/</code>， 便可以看到页面内容。当项目代码有变动，页面也就随之变动。</p>
+<p><code>webpack-dev-server</code> 支持一些配置。比如修改端口，简单的方式直接通过控制台:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ webpack-dev-server --inline --hot --host 0.0.0.0 --port 1024 --history-api-fallback</div></pre></td></tr></table></figure></p>
+<p>也可以通过配置 <code>entry</code> ,修改一些参数。</p>
 
       
     </div>
